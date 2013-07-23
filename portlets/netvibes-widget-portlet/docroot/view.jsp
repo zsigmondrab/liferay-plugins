@@ -14,13 +14,15 @@
  */
 --%>
 
+<%@ page import="com.liferay.netvibeswidget.util.NetvibesPropsValues" %>
+
 <%@ include file="/init.jsp" %>
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(link) %>">
 
 		<%
-		String iframeURL = "http://nvmodules.netvibes.com/widget/frame?uwaUrl=" + HttpUtil.encodeURL(link) + "&id=" + HttpUtil.encodeURL(PortalUtil.getPortletId(renderRequest)) + "&ifproxyUrl=" + HttpUtil.encodeURL(request.getContextPath() + "/proxy.jsp");
+			String iframeURL = NetvibesPropsValues.UWA_URL + "=" + HttpUtil.encodeURL(NetvibesPropsValues.FEED_PROVIDER_URL + "&url=" + HttpUtil.encodeURL(link)) + "&id=" + HttpUtil.encodeURL(PortalUtil.getPortletId(renderRequest)) + "&ifproxyUrl=" + HttpUtil.encodeURL(request.getContextPath() + "/proxy.jsp");
 		%>
 
 		<iframe alt="<%= alt %>" height="<%= windowState.equals(WindowState.MAXIMIZED) ? heightMaximized : heightNormal %>" id="<portlet:namespace />iframe" name="<portlet:namespace />iframe" src="<%= iframeURL %>" width="<%= width %>"></iframe>
